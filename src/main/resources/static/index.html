@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="./jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+</head>
+<body>
+
+<div>
+    <h1>hello test docker!</h1>
+
+    <div>
+        <h3>redis test</h3>
+        <div>
+            <span>set value &nbsp;:&nbsp;</span> <label> <input id="setRedisValueInput" type="text"/> </label>
+            <button onclick="setRedisValue()">确定</button>
+        </div>
+        <div>
+            <button onclick="getRedisValue()">获取 &nbsp; value &nbsp;</button> &nbsp; <span
+                id="getRedisValueSpan"></span>
+        </div>
+    </div>
+    <br/><br/>
+    <div>
+        <h3>mysql</h3>
+        <div>
+            <div>
+                <label><input type="text" id="addMysqlDataInput"/></label>
+                <button onclick="addMysqlData()">添加</button>
+            </div>
+            <div>
+                <button onclick="listMysqlData()">刷新列表</button>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>name</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="listMysqlDataBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

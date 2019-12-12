@@ -1,0 +1,24 @@
+
+# get redis value
+GET http://127.0.0.1:8081/redis/value
+
+###
+# set value to redis
+POST http://127.0.0.1:8081/redis/setValue
+
+test123
+
+###
+
+# mysql list
+GET http://127.0.0.1:8081/jpa/list
+
+###
+# mysql add
+POST http://127.0.0.1:8081/jpa/save?name=testName
+
+###
+
+DELETE http://127.0.0.1:8081/jpa/del/4
+
+###
