@@ -42,7 +42,7 @@ $ sudo docker run -d --rm --name docker-test-jar -p 8081:8081 docker-java-app:1.
 
 文件结构与构建镜像与启动过程:
 
-![file_structure](./file_structure.png)
+[file_structure](./file_structure.png)
 
 如果在服务器的防火墙是打开的，就可以在外网使用服务器ip + 映射端口连接 springboot 服务了。
 
