@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+
+  redis:
+    # 镜像
+    image: redis:5.0.7
+    # 指定容器名
+    container_name: redis
+    volumes:
+      # 挂载 redis 配置文件，与 rdb 文件目录
+      - ../redis/redis.conf:/etc/redis/redis.conf:ro
+      - ../redis/data:/data
+    # 启动命令
+    command: ["redis-server", "/etc/redis/redis.conf"]
+    # 映射端口
+    ports:
+      - "6379:6379"
+
+  mysql:
+    image: mysql:5.7.28
+    container_name: mysql
+    volumes:
+      - ../mysql/my.cnf:/etc/mysql/my.cnf:ro
+      - ../mysql/data:/data/mysql
+      # 定义 mysql 初始化 sql, 参照 : https://github.com/docker-library/docs/tree/master/mysql#initializing-a-fresh-instance
+      # 注意 : 本地目录的 .sh, .sql, .sql.gz 文件需要先添加执行权限
+      # 由于这里的数据文件夹是挂载的宿主机, 需要保证宿主机里面的数据文件夹是空的, 不然不会执行初始化sql
+      - ../mysql/init/:/docker-entrypoint-initdb.d/
+    environment:
+      # 定义 mysql root 用户的密码, 参照 : https://github.com/docker-library/docs/tree/master/mysql#environment-variables
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306:3306"
+
+  docker_java_app:
+    build:
+      context: ../app
+      # 这里的路径是相对于 content 的
+      dockerfile: ./Dockerfile
+    container_name: my-app
+    volumes:
+      - ../app/:/app
+    ports:
+      - "8082:8082"
+    # 定义容器 redis 与 mysql 启动后在启动这个容器
+    depends_on:
+      - redis
+      - mysql
+  
+  
